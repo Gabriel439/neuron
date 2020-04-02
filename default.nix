@@ -30,10 +30,10 @@ in import rib {
     inherit root name additional-packages; 
     source-overrides = {
       neuron = neuronRoot;
+      # Until https://github.com/obsidiansystems/which/pull/6 is merged
+      which = builtins.fetchTarball "https://github.com/srid/which/archive/5061a97.tar.gz";
     } // source-overrides;
     overrides = self: super: with pkgs.haskell.lib; {
-      # Until https://github.com/obsidiansystems/which/pull/6 is merged
-      which = doJailbreak super.which;
       # We must add neuron-search as a runtime dependency to the 'neuron'
       # Haskell package so that other apps `import`ing this defafult.nix would
       # know where to find when building the neuron library dependency through
